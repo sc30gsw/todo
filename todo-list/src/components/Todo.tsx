@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { TodoList } from "../types/TodoList";
+import Form from "./Form";
+import List from "./List";
 
 const Todo = () => {
 	const todosList: TodoList[] = [
@@ -17,7 +19,14 @@ const Todo = () => {
 		},
 	];
 
-	return <div></div>;
+	const [todos, setTodos] = useState<TodoList[]>(todosList);
+
+	return (
+		<>
+			<List todos={todos} />
+			<Form />
+		</>
+	);
 };
 
 export default Todo;
