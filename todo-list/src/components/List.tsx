@@ -1,12 +1,17 @@
 import React from "react";
 import { TodoList } from "../types/TodoList";
 
-const List = ({ todos }: { todos: TodoList[] }) => {
+type Props = {
+	todos: TodoList[];
+	deleteTodo: (id: number) => void;
+};
+
+const List = ({ todos, deleteTodo }: Props) => {
 	return (
 		<div>
 			{todos.map((todo) => (
 				<div key={todo.id}>
-					<button>完了</button>
+					<button onClick={() => deleteTodo(todo.id)}>完了</button>
 					<span>{todo.content}</span>
 				</div>
 			))}

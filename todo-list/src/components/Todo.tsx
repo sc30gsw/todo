@@ -21,9 +21,14 @@ const Todo = () => {
 
 	const [todos, setTodos] = useState<TodoList[]>(todosList);
 
+	const deleteTodo = (id: number) => {
+		const newTodos: TodoList[] = todos.filter((todo) => todo.id !== id);
+		setTodos(newTodos);
+	};
+
 	return (
 		<>
-			<List todos={todos} />
+			<List todos={todos} deleteTodo={deleteTodo} />
 			<Form />
 		</>
 	);
