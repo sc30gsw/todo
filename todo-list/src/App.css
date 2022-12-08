@@ -1,4 +1,11 @@
 * {
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  height: 100vh;
+  overflow-y: scroll;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: #cffafe;
 }
