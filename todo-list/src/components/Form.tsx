@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
+import { TodoList } from "../types/TodoList";
 
-const Form = () => {
+type Props = {
+	createTodo: (todo: TodoList) => void;
+};
+
+const Form = ({ createTodo }: Props) => {
 	const [enteredTodo, setEnteredTodo] = useState<string>("");
+
+	const addTodo = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (enteredTodo === "") return;
+
+		const newTodo: TodoList = {
+			id: Math.floor(Math.random() * 1e5),
+			content: enteredTodo,
+		};
+
+		createTodo(newTodo);
+		setEnteredTodo("");
+	};
+
 	return (
 		<div>
-			<form>
+			<form onSubmit={addTodo}>
 				<input
 					type="text"
 					value={enteredTodo}
