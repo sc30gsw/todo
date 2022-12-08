@@ -5,20 +5,36 @@ type Props = {
 	createTodo: (todo: TodoList) => void;
 };
 
+/**
+ * Todo入力欄を構成するコンポーネント
+ *
+ * @param createTodo {(todo: TodoList) => void}
+ * @returns
+ */
 const Form = ({ createTodo }: Props) => {
 	const [enteredTodo, setEnteredTodo] = useState<string>("");
 
+	/**
+	 * フォーム送信時にTodoを追加するための関数
+	 *
+	 * @param e onSubmitイベント
+	 * @returns
+	 */
 	const addTodo = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		// 入力欄が空の場合、処理を抜ける
 		if (enteredTodo === "") return;
 
+		// 追加するTodoオブジェクトの作成
 		const newTodo: TodoList = {
 			id: Math.floor(Math.random() * 1e5),
 			content: enteredTodo,
 		};
 
+		// Todo登録
 		createTodo(newTodo);
+		// 入力欄を空にする
 		setEnteredTodo("");
 	};
 

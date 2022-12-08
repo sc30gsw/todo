@@ -6,6 +6,13 @@ type Props = {
 	deleteTodo: (id: number) => void;
 };
 
+/**
+ * Todo一覧を構成するコンポーネント
+ *
+ * @param todos {TodoList[]}
+ * @param deleteTodo {(id: number) => void}
+ * @returns
+ */
 const List = ({ todos, deleteTodo }: Props) => {
 	return (
 		<div>
