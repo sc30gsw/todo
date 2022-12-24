@@ -48,9 +48,22 @@ const Todo = () => {
 	 */
 	const createTodo = (todo: TodoList) => setTodos([...todos, todo]);
 
+	/**
+	 * Todoの更新を行う関数
+	 *
+	 * @param todo {TodoList}
+	 * @returns void
+	 */
+	const updateTodo = (todo: TodoList) => {
+		const newTodos = todos.map((_todo) => {
+			return _todo.id === todo.id ? { ..._todo, ...todo } : { ..._todo };
+		});
+		setTodos(newTodos);
+	};
+
 	return (
 		<>
-			<List todos={todos} deleteTodo={deleteTodo} />
+			<List todos={todos} deleteTodo={deleteTodo} updateTodo={updateTodo} />
 			<Form createTodo={createTodo} />
 		</>
 	);
