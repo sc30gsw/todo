@@ -5,6 +5,7 @@ import Item from "./Item";
 type Props = {
 	todos: TodoList[];
 	deleteTodo: (id: number) => void;
+	updateTodo: (todo: TodoList) => void;
 };
 
 /**
@@ -14,11 +15,16 @@ type Props = {
  * @param deleteTodo {(id: number) => void}
  * @returns
  */
-const List = ({ todos, deleteTodo }: Props) => {
+const List = ({ todos, deleteTodo, updateTodo }: Props) => {
 	return (
 		<div>
 			{todos.map((todo) => (
-				<Item key={todo.id} todo={todo} deleteTodo={deleteTodo} />
+				<Item
+					key={todo.id}
+					todo={todo}
+					deleteTodo={deleteTodo}
+					updateTodo={updateTodo}
+				/>
 			))}
 		</div>
 	);
