@@ -1,5 +1,6 @@
 import React from "react";
 import { TodoList } from "../types/TodoList";
+import Item from "./Item";
 
 type Props = {
 	todos: TodoList[];
@@ -17,10 +18,7 @@ const List = ({ todos, deleteTodo }: Props) => {
 	return (
 		<div>
 			{todos.map((todo) => (
-				<div key={todo.id}>
-					<button onClick={() => deleteTodo(todo.id)}>完了</button>
-					<span>{todo.content}</span>
-				</div>
+				<Item key={todo.id} todo={todo} deleteTodo={deleteTodo} />
 			))}
 		</div>
 	);
