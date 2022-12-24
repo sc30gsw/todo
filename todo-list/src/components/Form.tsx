@@ -30,6 +30,7 @@ const Form = ({ createTodo }: Props) => {
 		const newTodo: TodoList = {
 			id: Math.floor(Math.random() * 1e5),
 			content: enteredTodo,
+			editing: false,
 		};
 
 		// Todo登録
