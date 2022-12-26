@@ -1,26 +1,17 @@
-import React from "react";
-import { TodoList } from "../types/TodoList";
-
-type Props = {
-	todos: TodoList[];
-	deleteTodo: (id: number) => void;
-};
+import { useTodoContext } from "../context/TodoContext";
+import Item from "./Item";
 
 /**
  * Todo一覧を構成するコンポーネント
  *
- * @param todos {TodoList[]}
- * @param deleteTodo {(id: number) => void}
  * @returns
  */
-const List = ({ todos, deleteTodo }: Props) => {
+const List = () => {
+	const todos = useTodoContext();
 	return (
 		<div>
 			{todos.map((todo) => (
-				<div key={todo.id}>
-					<button onClick={() => deleteTodo(todo.id)}>完了</button>
-					<span>{todo.content}</span>
-				</div>
+				<Item key={todo.id} todo={todo} />
 			))}
 		</div>
 	);
