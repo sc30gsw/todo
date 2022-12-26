@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import { useDispatchTodoContext } from "../context/TodoContext";
 import { TodoList } from "../types/TodoList";
 
 type Props = {
 	todo: TodoList;
-	deleteTodo: (id: number) => void;
-	updateTodo: (todo: TodoList) => void;
 };
 
 /**
@@ -15,8 +14,13 @@ type Props = {
  * @param updateTodo {(todo: TodoList) => void}
  * @returns
  */
-const Item = ({ todo, deleteTodo, updateTodo }: Props) => {
+const Item = ({ todo }: Props) => {
+	const dispatch = useDispatchTodoContext();
 	const [editContent, setEditContent] = useState<string>(todo.content);
+
+	const complete = (todo: TodoList) => {
+		dispatch({ type: "todo/delete", todo });
+	};
 
 	/**
 	 * 入力値をuseStateに設定する関数
@@ -34,7 +38,7 @@ const Item = ({ todo, deleteTodo, updateTodo }: Props) => {
 	 */
 	const toggleEditMode = () => {
 		const newTodo = { ...todo, editing: !todo.editing };
-		updateTodo(newTodo);
+		dispatch({ type: "todo/update", todo: newTodo });
 	};
 
 	/**
@@ -46,12 +50,12 @@ const Item = ({ todo, deleteTodo, updateTodo }: Props) => {
 	const confirmEditTodo = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const newTodo = { ...todo, content: editContent, editing: !todo.editing };
-		updateTodo(newTodo);
+		dispatch({ type: "todo/update", todo: newTodo });
 	};
 
 	return (
 		<div>
-			<button onClick={() => deleteTodo(todo.id)}>完了</button>
+			<button onClick={() => complete(todo)}>完了</button>
 			<form onSubmit={confirmEditTodo} style={{ display: "inline" }}>
 				{todo.editing ? (
 					<input type="text" value={editContent} onChange={changeEditContent} />

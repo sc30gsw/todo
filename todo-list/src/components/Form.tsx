@@ -1,9 +1,6 @@
 import React, { FormEvent, useState } from "react";
+import { useDispatchTodoContext } from "../context/TodoContext";
 import { TodoList } from "../types/TodoList";
-
-type Props = {
-	createTodo: (todo: TodoList) => void;
-};
 
 /**
  * Todo入力欄を構成するコンポーネント
@@ -11,7 +8,8 @@ type Props = {
  * @param createTodo {(todo: TodoList) => void}
  * @returns
  */
-const Form = ({ createTodo }: Props) => {
+const Form = () => {
+	const dispatch = useDispatchTodoContext();
 	const [enteredTodo, setEnteredTodo] = useState<string>("");
 
 	/**
@@ -34,7 +32,8 @@ const Form = ({ createTodo }: Props) => {
 		};
 
 		// Todo登録
-		createTodo(newTodo);
+		// createTodo(newTodo);
+		dispatch({ type: "todo/add", todo: newTodo });
 		// 入力欄を空にする
 		setEnteredTodo("");
 	};
